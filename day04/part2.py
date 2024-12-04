@@ -1,5 +1,4 @@
 import sys
-from collections import Counter
 
 data = []
 for line in sys.stdin:
@@ -26,8 +25,7 @@ for row in range(R):
                 r1 += 1
                 c1 += -1
 
-        if (first == search or first[::-1] == search) and (second == search or second[::-1] ==
-                                                           search):
+        if (first == search or first[::-1] == search) and (second == search or second[::-1] == search):
             ans += 1
 
 print(ans)
