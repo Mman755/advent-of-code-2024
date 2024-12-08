@@ -27,9 +27,9 @@ for row in range(R):
                     done.append([antennas[i], (row, col)])
                 curr_y, curr_x = row, col
                 next_y, next_x = antennas[i]
-                _y, _x  = curr_y - next_y, curr_x - next_x
-                if 0 <= row + _y < R and 0 <= col + _x < C: 
-                    if antinodes[row + _y][col + _x] != "#":
+                _dy, _dx  = curr_y - next_y, curr_x - next_x
+                if 0 <= row + _dy < R and 0 <= col + _dx < C: 
+                    if antinodes[row + _dy][col + _dx] != "#":
                         count += 1
-                        antinodes[row + _y][col + _x] = "#"
+                        antinodes[row + _dy][col + _dx] = "#"
 print(count)

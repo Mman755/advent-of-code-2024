@@ -27,22 +27,22 @@ for row in range(R):
                     done.append([antennas[i], (row, col)])
                 curr_y, curr_x = row, col
                 next_y, next_x = antennas[i]
-                _y, _x  = curr_y - next_y, curr_x - next_x
-                y_dir, x_dir = row + _y, col + _x
+                _dy, _dx  = curr_y - next_y, curr_x - next_x
+                y_dir, x_dir = row + _dy, col + _dx
 
                 while 0 <= y_dir < R and 0 <= x_dir < C: 
                     if antinodes[y_dir][x_dir] != "#":
                         antinodes[y_dir][x_dir] = "#"
                         count += 1
-                    y_dir += _y
-                    x_dir += _x
+                    y_dir += _dy
+                    x_dir += _dx
 
-                y_dir, x_dir = row - _y, col - _x
+                y_dir, x_dir = row - _dy, col - _dx
                 while 0 <= y_dir < R and 0 <= x_dir < C: 
                     if antinodes[y_dir][x_dir] != "#":
                         antinodes[y_dir][x_dir] = "#"
                         count += 1
-                    y_dir -= _y
-                    x_dir -= _x
+                    y_dir -= _dy
+                    x_dir -= _dx
 
 print(count)
