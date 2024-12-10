@@ -33,13 +33,11 @@ def get_available_windows(right, layout):
 del idx, data
 free_ptr = next(i for i, val in enumerate(layout) if val == ".")
 right = len(layout) - 1
-done = set()
 while free_ptr <= right:
     free_spaces = get_available_windows(right, layout)
     block_start, block_end = block_window(right, layout)
     block_size = block_end - block_start + 1
 
-    placed = False
     for idx, space in enumerate(free_spaces):
         sl, sr = space
         if (sr - sl + 1) >= block_size:
@@ -51,7 +49,6 @@ while free_ptr <= right:
             free_ptr = next(i for i, val in enumerate(layout) if val == ".")
             del free_spaces[idx]
             right = block_start
-            placed = True
             break
     char = layout[right]
     while layout[right] == char or layout[right] == ".": 
