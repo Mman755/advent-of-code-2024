@@ -10,7 +10,7 @@ for i in range(N):
         layout.extend([idx for _ in range(data[i])])
         idx += 1
     else:
-        layout.extend(["." for _ in range(data[i])])
+        layout.extend([-1 for _ in range(data[i])])
 
 def block_window(right_ptr, layout):
     starting_ptr = right_ptr
@@ -23,15 +23,15 @@ def get_available_windows(right, layout):
     coords = []
     i = 0
     while i < N:
-        if layout[i] == ".":
+        if layout[i] == -1:
             start = i
-            while i < N and layout[i] == ".": i += 1
+            while i < N and layout[i] == -1: i += 1
             coords.append((start, i - 1))
         else: i += 1
     return coords
 
 del idx, data
-free_ptr = next(i for i, val in enumerate(layout) if val == ".")
+free_ptr = next(i for i, val in enumerate(layout) if val == -1)
 right = len(layout) - 1
 while free_ptr <= right:
     free_spaces = get_available_windows(right, layout)
@@ -43,16 +43,16 @@ while free_ptr <= right:
         if (sr - sl + 1) >= block_size:
             for i in range(sl, sl + block_size):
                 layout[i] = layout[right]
-                layout[right] = "."
+                layout[right] = -1
                 right -= 1
 
-            free_ptr = next(i for i, val in enumerate(layout) if val == ".")
+            free_ptr = next(i for i, val in enumerate(layout) if val == -1)
             del free_spaces[idx]
             right = block_start
             break
     char = layout[right]
-    while layout[right] == char or layout[right] == ".": 
+    while layout[right] == char or layout[right] == -1: 
         right -= 1
 
-ans = sum(_idx * x for _idx, x in enumerate(layout) if x != ".")
+ans = sum(_idx * x for _idx, x in enumerate(layout) if x != -1)
 print(ans)
