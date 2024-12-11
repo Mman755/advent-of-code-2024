@@ -1,7 +1,6 @@
 import sys
 from functools import lru_cache
 
-# Replaced part 1 with part 2 memo sol
 @lru_cache(None)
 def blink(stone, iters):
     if iters == 0:
@@ -17,8 +16,5 @@ def blink(stone, iters):
 
     return blink(stone * 2024, iters - 1)
 
-def solve(stones, iterations):
-    return sum([blink(stone, iterations) for stone in stones])
-
 stones = [int(stone) for stone in sys.stdin.readline().split(" ")]
-print(solve(stones, 75))
+print(sum([blink(stone, 25) for stone in stones]))

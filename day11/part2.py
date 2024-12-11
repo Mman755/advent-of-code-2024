@@ -16,8 +16,5 @@ def blink(stone, iters):
 
     return blink(stone * 2024, iters - 1)
 
-def solve(stones, iterations):
-    return sum([blink(stone, iterations) for stone in stones])
-
 stones = [int(stone) for stone in sys.stdin.readline().split(" ")]
-print(solve(stones, 75))
+print(sum([blink(stone, 75) for stone in stones]))
