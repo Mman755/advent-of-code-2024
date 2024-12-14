@@ -9,7 +9,7 @@ original_garden = copy.deepcopy(garden)
 R, C = len(garden), len(garden[0])
 visited = set()
 
-def fill(y, x, target_crop, replacement):
+def flood_fill(y, x, target_crop, replacement):
     if (y < 0 or y >= R or x < 0 or x >= C or garden[y][x] != target_crop):
         return []
 
@@ -18,7 +18,7 @@ def fill(y, x, target_crop, replacement):
     dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
     for dir in dirs:
         dy, dx = dir
-        coordinates += fill(y + dy, x + dx, target_crop, replacement)
+        coordinates += flood_fill(y + dy, x + dx, target_crop, replacement)
 
     return coordinates
 
@@ -44,7 +44,7 @@ ans = 0
 for row in range(R):
    for col in range(C):
        if (row, col) not in visited and garden[row][col] != "*":
-            coordinates = fill(row, col, garden[row][col], '*')
+            coordinates = flood_fill(row, col, garden[row][col], '*')
             ans += len(coordinates) * find_corners(coordinates)
             for c in coordinates:
                 visited.update(c for c in coordinates)
